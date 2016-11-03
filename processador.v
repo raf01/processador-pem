@@ -1,38 +1,27 @@
 //module registrador (SW,LEDR,CLOCK_27);
 
-module  processador(SW, KEY, LEDR);
+module  processador(SW, KEY, LEDR, LEDG);
 
-input [4:0] SW;  // Dados de entrada do registrador
+input [8:0] SW;  // Dados de entrada da ULA + bit de enable
 input [0:0] KEY; // Clock antigo
-// input CLOCK_27;
 
-output [3:0] LEDR; // Exibiçao dos bits do registrador 
+output [7:0] LEDR; // Exibiçao dos bits do registrador 
+output [7:0] LEDG; // Exibiçao dos bits do registrador 
 
-wire [3:0] DBUS; // Ligaçao entre os switches e os bits do registrador
-wire [3:0] RegAQ; // Ligacao entre a saida dos registradores e os LEDs
-wire RegAWn, Clock, Clockn; 
+wire [7:0] barramentoDados; // Ligaçao entre os switches e os bits do registrador
+wire [7:0] ledsRegSaida; // Ligacao entre a saida do registrador de saida e os LEDs
+wire [7:0] ledsRegAcumulador; // Ligacao entre a saida do registrador acumulador e os LEDs
+wire RegEnable, Clock, Clockn; 
+wire [7:0] acumulador; //Registrador acumulador
+wire [7:0] registradorSaida; // Registrador de saida
+reg [7:0] memoriaRAM [0:15]; // Memoria RAM
 
-assign LEDR [3:0] = RegAQ [3:0];
+assign LEDR [7:0] = ledsRegSaida [3:0];
+assign LEDG [7:0] = ledsRegAcumulador [3:0];
 assign Clockn = !Clock, Clock = KEY[0];
-assign RegAWn = SW[4];
-assign DBUS[3:0] = SW[3:0];
+assign RegEnable = SW[8];
+assign barramentoDados[7:0] = SW[7:0];
 
-reg4 AReg (DBUS, RegAWn, Clockn, RegAQ);
-
-endmodule
-	
-
-module reg4 (D, Wn, clock, Q);
-
-input [3:0] D;
-input clock, Wn;
-
-output reg [3:0] Q;
-
-always @ (posedge clock)
-
-	if (Wn==0)
-		Q <= D;
+ULA mULA (barramentoDados, RegEnable, Clockn, ledsRegAcumulador, ledsRegSaida);
 
 endmodule
- 
