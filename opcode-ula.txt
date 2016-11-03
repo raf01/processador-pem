@@ -1,0 +1,38 @@
+Lista de instruções da ULA
+==========================
+
+Grupo:
+
+Fernanda Karoline Vasconcelos de Melo
+Layhana Gadelha Silvestre Silva
+Rafael Guerra de Pontes
+
+
+	OPCODE e suas funções
+	=====================
+
+	0000: NOP (No operation).
+
+	0001: Armazena o operando no acumulador.
+
+	0010: Soma o operando que está no acumulador e armazena o resultado no registrador de saída.
+
+	0011: Subtrai do acumulador o valor que está no operando. Resultado é armazenado no registrador de saída.
+
+	0100: Multiplica o conteúdo do acumulador com o operando e armazena o resultado no registrador de saída.
+
+	0101: Divide o conteúdo do acumulador pelo operando e armazena o resultado no registrador de saída.
+	
+	0110: Operação AND bit a bit do acumulador com o operando. Resultado é armazenado no registrador de saída.
+	
+	0111: Operação OR bit a bit do acumulador com o operando. Resultado é armazenado no registrador de saída.
+	
+	1000: Operação XOR bit a bit do acumulador com o operando. Resultado é armazenado no registrador de saída.
+	
+	1001: Realiza operação NOT bit a bit com o operando. Resultado é armazenado no registrador de saída.
+	
+	1010: Zera o conteúdo do acumulador (todos os bits em zero).
+	
+	1011: Armazena o conteúdo do acumulador na posição de memória do operando.
+	
+	1100: Armazena o conteúdo do registrador de saída na posição de memória do operando.
